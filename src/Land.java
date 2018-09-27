@@ -16,6 +16,14 @@ public class Land{
 
 	}
 
+	Land(float[][] sun, float[][] og, int x, int y)
+	{
+		sunlight = sun;
+		ogSunlight = og;
+		this.x = x;
+		this.y = y;
+	}
+
 	int getDimX() {
 		int x = sunlight[0].length;
 		return x;
@@ -24,6 +32,26 @@ public class Land{
 	int getDimY() {
 		int y = sunlight.length;
 		return y;
+	}
+
+	float[][] cloneSunlight(){
+		float[][] result = new float[sunlight.length][sunlight[0].length];
+		for (int i = 0; i < sunlight.length; i++)
+		{
+			for (int j = 0; i < sunlight[0].length; j++)
+			{
+				result[i][j] = ogSunlight[i][j];
+			}
+		}
+		return result;
+	}
+
+	Land cloneLand(){
+		float[][] sun = this.cloneSunlight();
+		float[][] og = this.cloneSunlight();
+		Land result = new Land(sun, og, x, y);
+		return result;
+
 	}
 	
 	// Reset the shaded landscape to the same as the initial sun exposed landscape

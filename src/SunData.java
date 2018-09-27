@@ -11,7 +11,14 @@ public class SunData{
 	Tree [] trees;// array of individual tress located on the sunmap
 
 	
-	void readData(String fileName){ 
+	public SunData(Land l, Tree[] t){
+		sunmap = l;
+		trees = t;
+	}
+
+	public SunData(){}
+
+	void readData(String fileName){
 		try{ 
 			Scanner sc = new Scanner(new File(fileName));
 			
@@ -45,6 +52,67 @@ public class SunData{
 			System.out.println("Malformed input file "+fileName);
 			e.printStackTrace();
 		}
+	}
+
+	void readDataSapling(String fileName){
+		try{
+			Scanner sc = new Scanner(new File(fileName));
+
+			// load sunmap
+			int dimx = sc.nextInt();
+			int dimy = sc.nextInt();
+			sunmap = new Land(dimx,dimy);
+			for(int x = 0; x < dimx; x++)
+				for(int y = 0; y < dimy; y++) {
+					sunmap.setFull(x,y,sc.nextFloat());
+				}
+			sunmap.resetShade();
+
+			// load forest
+			int numt = sc.nextInt();
+			trees = new Tree[numt];
+			for(int t=0; t < numt; t++)
+			{
+				int xloc = sc.nextInt();
+				int yloc = sc.nextInt();
+				float ext = (float) sc.nextInt();
+				ext = 0.4f;
+				trees[t] = new Tree(xloc, yloc, ext);
+			}
+			sc.close();
+		}
+		catch (IOException e){
+			System.out.println("Unable to open input file "+fileName);
+			e.printStackTrace();
+		}
+		catch (java.util.InputMismatchException e){
+			System.out.println("Malformed input file "+fileName);
+			e.printStackTrace();
+		}
+	}
+
+	SunData cloneSundata(){
+		Land sun = sunmap.cloneLand();
+		Tree[] t = new Tree[trees.length];
+		for (int i = 0; i < trees.length; i++)
+		{
+			t[i] = trees[i].cloneTree();
+		}
+
+		SunData result = new SunData(sun, t);
+		return result;
+	}
+
+	SunData cloneResetSundata(){
+		Land sun = sunmap.cloneLand();
+		Tree[] t = new Tree[trees.length];
+		for (int i = 0; i < trees.length; i++)
+		{
+			t[i] = trees[i].cloneTreeSapling();
+		}
+
+		SunData result = new SunData(sun, t);
+		return result;
 	}
 	
 	void writeData(String fileName){

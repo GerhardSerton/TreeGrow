@@ -19,6 +19,7 @@ public class TreeGrow implements ActionListener {
 	JButton end = new JButton("End");
 	static JLabel year = new JLabel("0");
 	static RecursiveOperations ro;
+	static String input;
 
 	public TreeGrow(){}
 	// start timer
@@ -93,8 +94,6 @@ public class TreeGrow implements ActionListener {
 	public static void main(String[] args) {
 		TreeGrow t = new TreeGrow();
 		SunData sundata = new SunData();
-
-		String input;
 		// check that number of command line arguments is correct
 		if(args.length != 1)
 		{
@@ -161,6 +160,10 @@ public class TreeGrow implements ActionListener {
 		ro.pause();
 	}
 	public void resetButton(){
-		ro.reset();
+		ro.pause();
+		SunData s = new SunData();
+		s.readDataSapling(input);
+		RecursiveOperations rnew = new RecursiveOperations(s);
+		ro = rnew;
 	}
 }

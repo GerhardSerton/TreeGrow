@@ -30,6 +30,22 @@ public
 		ext = e;
 	}
 
+	Tree cloneTree(){
+		int x = xpos;
+		int y = ypos;
+		float e = this.ext;
+		Tree result = new Tree(x, y, e);
+		return result;
+	}
+
+	Tree cloneTreeSapling(){
+		int x = xpos;
+		int y = ypos;
+		float e = 0.4f;
+		Tree result = new Tree(x, y, e);
+		return result;
+	}
+
 	// return the average sunlight for the cells covered by the tree
 	float sunexposure(Land land){
 		// to do 

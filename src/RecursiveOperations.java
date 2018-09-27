@@ -1,4 +1,5 @@
 import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.TimeUnit;
 
 public class RecursiveOperations {
 
@@ -17,11 +18,6 @@ public class RecursiveOperations {
     }
 
 
-    public void organiseTreesQuickSort()
-    {
-        quickSort(0, sundata.trees.length - 1);
-    }
-
     public float getMaxExtent(SunData sd)
     {
         float max = pool.invoke(new RecursiveMax(sundata.trees.length, 0, sundata));
@@ -36,41 +32,7 @@ public class RecursiveOperations {
         paused = false;
     }
 
-    public void reset(){
 
-    }
-
-
-    public void quickSort(int low, int high)
-    {
-        int ogLow = low;
-        int ogHigh = high;
-
-        float p = sundata.trees[low + (high - low)/2].ext;
-
-        while (low <= high)
-        {
-            while (sundata.trees[low].ext < p)
-            {
-                low++;
-            }
-            while (sundata.trees[high].ext > p)
-            {
-                high--;
-            }
-            if (low <= high)
-            {
-                float t = sundata.trees[low].ext;
-                sundata.trees[low].ext = sundata.trees[high].ext;
-                sundata.trees[high].ext = t;
-            }
-        }
-
-        if (ogLow < high)
-            quickSort(ogLow, high);
-        if (low < ogHigh)
-            quickSort(low,ogHigh);
-    }
 
     public SunData incrementYear(){
         if (!paused) {
