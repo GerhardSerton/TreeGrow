@@ -17,13 +17,13 @@ public class Land{
 	}
 
 	int getDimX() {
-		// to do
-		return 0; // incorrect value
+		int x = sunlight[0].length;
+		return x;
 	}
 	
 	int getDimY() {
-		// to do
-		return 0; // incorrect value
+		int y = sunlight.length;
+		return y;
 	}
 	
 	// Reset the shaded landscape to the same as the initial sun exposed landscape

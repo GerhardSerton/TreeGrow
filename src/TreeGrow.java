@@ -17,7 +17,8 @@ public class TreeGrow implements ActionListener {
 	JButton stop = new JButton("Stop");
 	JButton reset = new JButton("Reset");
 	JButton end = new JButton("End");
-	JLabel year = new JLabel("0");
+	static JLabel year = new JLabel("0");
+	static RecursiveOperations ro;
 
 	public TreeGrow(){}
 	// start timer
@@ -104,7 +105,8 @@ public class TreeGrow implements ActionListener {
 			//Scanner kin = new Scanner(System.in);
 			//input = kin.next();
 
-			input = "sample_input.txt";
+			//input = "sample_input.txt";
+			input = "smalltest.txt";
 		}
 		else
 		{
@@ -121,6 +123,12 @@ public class TreeGrow implements ActionListener {
 		t.setupGUI(t.frameX, t.frameY, sundata.trees);
 		
 		// create and start simulation loop here as separate thread
+		ro = new RecursiveOperations(sundata);
+		while (true)
+		{
+			ro.incrementYear();
+			year.setText(ro.currentYear + "");
+		}
 
 
 	}
@@ -146,7 +154,13 @@ public class TreeGrow implements ActionListener {
 
 	}
 
-	public void runButton(){}
-	public void stopButton(){}
-	public void resetButton(){}
+	public void runButton(){
+		ro.resume();
+	}
+	public void stopButton(){
+		ro.pause();
+	}
+	public void resetButton(){
+		ro.reset();
+	}
 }

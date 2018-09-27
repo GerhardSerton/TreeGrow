@@ -37,13 +37,17 @@ public class RecursiveTree extends RecursiveTask<SunData>
                     float suntot = 0;
                     float blocktot = 0;
                     //lock these whole loops
-                    for (int u = (y - radius); u < (y + radius); u++)
-                    {
-                        for (int d = (x - radius); d < (x + radius); d++)
-                        {
-                            suntot += sundata.sunmap.sunlight[u][d];
-                            sundata.sunmap.sunlight[u][d] = sundata.sunmap.sunlight[u][d] *0.1f;
-                            blocktot++;
+                    synchronized (this) {
+                        for (int u = (y - radius); u < (y + radius); u++) {
+                            for (int d = (x - radius); d < (x + radius); d++) {
+                                try {
+                                    suntot += sundata.sunmap.sunlight[u][d];
+                                    sundata.sunmap.sunlight[u][d] = sundata.sunmap.sunlight[u][d] * 0.1f;
+                                    blocktot++;
+                                }
+                                catch (ArrayIndexOutOfBoundsException e)
+                                {}
+                            }
                         }
                     }
 
@@ -52,14 +56,17 @@ public class RecursiveTree extends RecursiveTask<SunData>
                     sundata.trees[i] = t;
                 }
             }
+            return null;
         }
+        else {
 
-        RecursiveTree left = new RecursiveTree((high+low)/2, low, sundata, rangeMax, rangeMin);
-        RecursiveTree right = new RecursiveTree(high, (high+low)/2, sundata, rangeMax, rangeMin);
+            RecursiveTree left = new RecursiveTree((high + low) / 2, low, sundata, rangeMax, rangeMin);
+            RecursiveTree right = new RecursiveTree(high, (high + low) / 2, sundata, rangeMax, rangeMin);
 
-        left.fork();
-        right.compute();
+            left.fork();
+            right.compute();
 
-        return null;
+            return null;
+        }
     }
 }
