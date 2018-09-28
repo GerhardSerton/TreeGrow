@@ -48,6 +48,7 @@ public class RecursiveOperations {
                 pool.invoke(new RecursiveTree(sundata.trees.length, 0, sundata, rangeMax, rangeMin));
             }
             currentYear++;
+            sundata.resetSunlight();
         }
 
         return sundata;

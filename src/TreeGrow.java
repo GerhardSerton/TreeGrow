@@ -104,8 +104,8 @@ public class TreeGrow implements ActionListener {
 			//Scanner kin = new Scanner(System.in);
 			//input = kin.next();
 
-			//input = "sample_input.txt";
-			input = "smalltest.txt";
+			input = "sample_input.txt";
+			//input = "smalltest.txt";
 		}
 		else
 		{
@@ -165,5 +165,6 @@ public class TreeGrow implements ActionListener {
 		s.readDataSapling(input);
 		RecursiveOperations rnew = new RecursiveOperations(s);
 		ro = rnew;
+		fp.changeTrees(s.trees);
 	}
 }

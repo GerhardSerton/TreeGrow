@@ -9,23 +9,19 @@ public class ForestPanel extends JPanel implements Runnable {
 	Tree[] forest;	// trees to render
 	List<Integer> rndorder; // permutation of tree indices so that rendering is less structured
 
-	private JButton run = new JButton("Run");
-	private JButton stop = new JButton("Stop");
-	private JButton reset = new JButton("Reset");
-	private JButton end = new JButton("End");
-	private JLabel year = new JLabel("0");
+
 	
 	ForestPanel(Tree[] trees) {
 		forest=trees;
-		JPanel newPanel = new JPanel(new GridBagLayout());
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.anchor = GridBagConstraints.WEST;
 		constraints.insets = new Insets(10,10,10,10);
 		constraints.gridx = 0;
 		constraints.gridy = 0;
-		newPanel.add(run, constraints);
-		constraints.gridx = 1;
-		newPanel.add(stop, constraints);
+	}
+
+	public void changeTrees(Tree[] trees){
+		forest = trees;
 	}
 		
 	public void paintComponent(Graphics g) {
@@ -56,15 +52,6 @@ public class ForestPanel extends JPanel implements Runnable {
 		}	
 	}
 
-	public void runButton(){}
-
-	public void stopButton(){}
-
-	public void resetButton(){}
-
-	public void endButton(){}
-
-	public void changeYear(){}
 	
 	public void run() {
 			
@@ -72,7 +59,7 @@ public class ForestPanel extends JPanel implements Runnable {
 		rndorder = new ArrayList<Integer>();
 		for(int l = 0; l < forest.length; l++)
 			rndorder.add(l);
-		java.util.Collections.shuffle(rndorder);
+		Collections.shuffle(rndorder);
 		
 		// render loop
 		while(true) {
@@ -81,7 +68,7 @@ public class ForestPanel extends JPanel implements Runnable {
 				Thread.sleep(20); 
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			};
+			}
 		}
 	}
 

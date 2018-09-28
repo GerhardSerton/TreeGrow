@@ -52,7 +52,7 @@ public class RecursiveTree extends RecursiveTask<SunData>
                     }
 
                     float avg = suntot / blocktot;
-                    t.ext += avg;
+                    t.ext += (avg / t.growfactor);
                     sundata.trees[i] = t;
                 }
             }

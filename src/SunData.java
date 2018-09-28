@@ -18,6 +18,7 @@ public class SunData{
 
 	public SunData(){}
 
+
 	void readData(String fileName){
 		try{ 
 			Scanner sc = new Scanner(new File(fileName));
@@ -89,6 +90,10 @@ public class SunData{
 			System.out.println("Malformed input file "+fileName);
 			e.printStackTrace();
 		}
+	}
+
+	void resetSunlight(){
+		sunmap.resetShade();
 	}
 
 	SunData cloneSundata(){
