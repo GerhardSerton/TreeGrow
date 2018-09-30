@@ -4,21 +4,37 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
-// Trees define a canopy which covers a square area of the landscape
 public class SunData{
-	
-	Land sunmap; // regular grid with average daily sunlight stored at each grid point
-	Tree [] trees;// array of individual tress located on the sunmap
 
-	
+	/**
+	 * regular grid with average daily sunlight stored at each grid point
+	 */
+	Land sunmap;
+	/**
+	 * array of individual tress located on the sunmap
+	 */
+	Tree [] trees;
+
+	/**
+	 * Constructor. Creates a SunData object containing the supplied variables
+	 * @param l Land
+	 * @param t Forest
+	 */
 	public SunData(Land l, Tree[] t){
 		sunmap = l;
 		trees = t;
 	}
 
+	/**
+	 * Default Constructor
+	 */
+
 	public SunData(){}
 
-
+	/**
+	 * Reads in a file, and sets the values of sunmap and trees to it's contents.
+	 * @param fileName	The filename
+	 */
 	void readData(String fileName){
 		try{ 
 			Scanner sc = new Scanner(new File(fileName));
@@ -55,6 +71,10 @@ public class SunData{
 		}
 	}
 
+	/**
+	 * Reads in a file, and sets the values of sunmap and trees to it's contents. However, all of the Tree extents are set to 0.4f
+	 * @param fileName The filename
+	 */
 	void readDataSapling(String fileName){
 		try{
 			Scanner sc = new Scanner(new File(fileName));
@@ -92,47 +112,13 @@ public class SunData{
 		}
 	}
 
+	/**
+	 * Sets the sunmap's sunlight to it's original values.
+	 */
+
 	void resetSunlight(){
 		sunmap.resetShade();
 	}
 
-	SunData cloneSundata(){
-		Land sun = sunmap.cloneLand();
-		Tree[] t = new Tree[trees.length];
-		for (int i = 0; i < trees.length; i++)
-		{
-			t[i] = trees[i].cloneTree();
-		}
-
-		SunData result = new SunData(sun, t);
-		return result;
-	}
-
-	SunData cloneResetSundata(){
-		Land sun = sunmap.cloneLand();
-		Tree[] t = new Tree[trees.length];
-		for (int i = 0; i < trees.length; i++)
-		{
-			t[i] = trees[i].cloneTreeSapling();
-		}
-
-		SunData result = new SunData(sun, t);
-		return result;
-	}
-	
-	void writeData(String fileName){
-		 try{ 
-			 FileWriter fileWriter = new FileWriter(fileName);
-			 PrintWriter printWriter = new PrintWriter(fileWriter);
-			 printWriter.printf("%d\n", trees.length);
-			 for(int t=0; t < trees.length; t++)
-				 printWriter.printf("%d %d %f\n", trees[t].getX(), trees[t].getY(), trees[t].getExt());
-			 printWriter.close();
-		 }
-		 catch (IOException e){
-			 System.out.println("Unable to open output file "+fileName);
-				e.printStackTrace();
-		 }
-	}
 	
 }

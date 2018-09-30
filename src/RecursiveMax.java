@@ -2,17 +2,44 @@ import java.util.concurrent.RecursiveTask;
 
 public class RecursiveMax extends RecursiveTask<Float> {
 
+    /**
+     * High array position
+     */
     int high;
+    /**
+     * Low array position
+     */
     int low;
+    /**
+     * Simulation data
+     */
     SunData sd;
+    /**
+     * Current highest extent
+     */
     float max = 0;
+    /**
+     * Sequential cutoff
+     */
     int sequentialCutoff = 1000;
+
+    /**
+     * Constructor. Sets high, low, and sd.
+     * @param h High
+     * @param l Low
+     * @param sd Simulation data
+     */
 
     public RecursiveMax(int h, int l, SunData sd){
         high = h;
         low = l;
         this.sd = sd;
     }
+
+    /**
+     * Parallel portion. Looks through the Tree array, and returns the highest extent.
+     * @return
+     */
     @Override
     protected Float compute() {
         if (high - low < sequentialCutoff)

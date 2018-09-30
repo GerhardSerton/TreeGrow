@@ -1,65 +1,61 @@
 
 // Trees define a canopy which covers a square area of the landscape
 public class Tree{
-	
+
 private
-	int xpos;	// x-coordinate of center of tree canopy
-	int ypos;	// y-coorindate of center of tree canopy
-	float ext;	// extent of canopy out in vertical and horizontal from center
-	
-	float growfactor = 1000.0f; // divide average sun exposure by this amount to get growth in extent
-	
-public	
+/**
+ *  x-coordinate of center of tree canopy
+  */
+	int xpos;
+	/**
+	 * y-coorindate of center of tree canopy
+	 */
+	int ypos;
+	/**
+	 * extent of canopy out in vertical and horizontal from center
+	 */
+	float ext;
+
+	/**
+	 * divide average sun exposure by this amount to get growth in extent
+	 */
+	float growfactor = 1000.0f;
+
+	/**
+	 * Constructor. Sets the values of xpo, ypos, and ext.
+	 * @param x	X-coordinate
+	 * @param y	Y-coordinate
+	 * @param e	Extent
+	 */
+	public
 	Tree(int x, int y, float e){
 		xpos=x; ypos=y; ext=e;
 	}
 
-	
+
+	/**
+	 * Returns X-Coordinate
+	 * @return X-coordinate
+	 */
 	int getX() {
 		return xpos;
 	}
-	
+	/**
+	 * Returns Y-Coordinate
+	 * @return Y-coordinate
+	 */
 	int getY() {
 		return ypos;
 	}
+
+	/**
+	 * Returns Extent
+	 * @return Extent
+	 */
 	
 	float getExt() {
 		return ext;
 	}
-	
-	void setExt(float e) {
-		ext = e;
-	}
 
-	Tree cloneTree(){
-		int x = xpos;
-		int y = ypos;
-		float e = this.ext;
-		Tree result = new Tree(x, y, e);
-		return result;
-	}
 
-	Tree cloneTreeSapling(){
-		int x = xpos;
-		int y = ypos;
-		float e = 0.4f;
-		Tree result = new Tree(x, y, e);
-		return result;
-	}
-
-	// return the average sunlight for the cells covered by the tree
-	float sunexposure(Land land){
-		// to do 
-		return 0.0f; // not correct
-	}
-	
-	// is the tree extent within the provided range [minr, maxr)
-	boolean inrange(float minr, float maxr) {
-		return (ext >= minr && ext < maxr);
-	}
-	
-	// grow a tree according to its sun exposure
-	void sungrow(Land land) {
-		// to do
-	}
 }

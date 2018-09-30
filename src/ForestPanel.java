@@ -10,7 +10,10 @@ public class ForestPanel extends JPanel implements Runnable {
 	List<Integer> rndorder; // permutation of tree indices so that rendering is less structured
 
 
-	
+	/**
+	 * Constructor.
+	 * @param trees Forest
+	 */
 	ForestPanel(Tree[] trees) {
 		forest=trees;
 		GridBagConstraints constraints = new GridBagConstraints();
@@ -20,10 +23,18 @@ public class ForestPanel extends JPanel implements Runnable {
 		constraints.gridy = 0;
 	}
 
+	/**
+	 * Changes the trees array monitored by the
+	 * @param trees Forest
+	 */
 	public void changeTrees(Tree[] trees){
 		forest = trees;
 	}
-		
+
+	/**
+	 * Draws the forest
+	 * @param g Graphics
+	 */
 	public void paintComponent(Graphics g) {
 		int width = getWidth();
 		int height = getHeight();
@@ -52,6 +63,9 @@ public class ForestPanel extends JPanel implements Runnable {
 		}	
 	}
 
+	/**
+	 * Starts rendering
+	 */
 	
 	public void run() {
 			

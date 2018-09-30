@@ -8,30 +8,60 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class TreeGrow implements ActionListener {
-	long startTime = 0;
+	/**
+	 * Width of the UI
+	 */
 	int frameX;
+	/**
+	 * Length of the UI
+	 */
 	int frameY;
+	/**
+	 * ForestPanel
+	 */
 	ForestPanel fp;
 
+	/**
+	 * Run button
+	 */
 	JButton run = new JButton("Run");
+	/**
+	 * Stop button
+	 */
 	JButton stop = new JButton("Stop");
+	/**
+	 * Reset button
+	 */
 	JButton reset = new JButton("Reset");
+	/**
+	 * End button
+	 */
 	JButton end = new JButton("End");
+	/**
+	 * Year counter
+	 */
 	static JLabel year = new JLabel("0");
+	/**
+	 * RecursiveOperation "controller"
+	 */
 	static RecursiveOperations ro;
+	/**
+	 * User input
+	 */
 	static String input;
 
+
+	/**
+	 * Default Constructor
+	 */
 	public TreeGrow(){}
-	// start timer
-	private void tick(){
-		startTime = System.currentTimeMillis();
-	}
-	
-	// stop timer, return time elapsed in seconds
-	private float tock(){
-		return (System.currentTimeMillis() - startTime) / 1000.0f; 
-	}
-	
+
+	/**
+	 * Sets up the UI
+	 * @param frameX	X-size
+	 * @param frameY	Y-Size
+	 * @param trees	Trees array to monitor
+	 */
 	public void setupGUI(int frameX,int frameY,Tree [] trees) {
 		Dimension fsize = new Dimension(800, 800);
 		// Frame init and dimensions
@@ -89,8 +119,12 @@ public class TreeGrow implements ActionListener {
         buttons.setVisible(true);
 
 	}
-	
-		
+
+
+	/**
+	 * Main method. Starts up the UI, and begins the simulation
+	 * @param args User input.
+	 */
 	public static void main(String[] args) {
 		TreeGrow t = new TreeGrow();
 		SunData sundata = new SunData();
@@ -101,10 +135,10 @@ public class TreeGrow implements ActionListener {
 			//System.exit(0);
 
 
-			//Scanner kin = new Scanner(System.in);
-			//input = kin.next();
+			Scanner kin = new Scanner(System.in);
+			input = kin.next();
 
-			input = "sample_input.txt";
+			//input = "sample_input.txt";
 			//input = "smalltest.txt";
 		}
 		else
@@ -132,6 +166,10 @@ public class TreeGrow implements ActionListener {
 
 	}
 
+	/**
+	 * Listens for button presses. If a button is pressed, activates it's associated method.
+	 * @param e ActionEvent
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == run)
@@ -153,12 +191,23 @@ public class TreeGrow implements ActionListener {
 
 	}
 
+	/**
+	 * Activates if the run button is pressed. Unpauses the simulation.
+	 */
 	public void runButton(){
 		ro.resume();
 	}
+
+	/**
+	 * Activates if the stop button is pressed. Pauses the simulation.
+	 */
 	public void stopButton(){
 		ro.pause();
 	}
+
+	/**
+	 * Activates if the reset button is pressed. Resets the simulation by reading in the file again, while setting all Tree extents to 0.4f.
+	 */
 	public void resetButton(){
 		ro.pause();
 		SunData s = new SunData();
